@@ -5,25 +5,28 @@ package nz.ac.auckland.se281;
 import nz.ac.auckland.se281.Main.Difficulty;
 
 public class Morra {
-  private int roundNumber = 0;
+  private int roundNumber;
   private Player player;
+  private Jarvis jarvis;
 
-  private Difficulty difficulty;
+  private int playerAverage;
+
 
   public Morra() {}
 
   public void newGame(Difficulty difficulty, int pointsToWin, String[] options) {
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
-
-    this.difficulty = difficulty;
+    roundNumber = 0;
 
     player = new Player(options[0]);
+    jarvis = new Jarvis(difficulty);
     
   }
 
   public void play() {
     // increment the round number for each time the user starts a new round.
     roundNumber++;
+    
     String roundNumberString = convertIntToString(roundNumber);
     
     MessageCli.START_ROUND.printMessage(roundNumberString);
@@ -34,8 +37,7 @@ public class Morra {
     int [] playerInputs = player.takePlayerInputs(this);    
 
     //computer moves
-    Jarvis jarvis = new Jarvis(difficulty);
-    int[] aiMoves = jarvis.setDifficulty();
+    int[] aiMoves = jarvis.playStrategy();
 
     //decide the result
 
@@ -48,6 +50,12 @@ public class Morra {
 
   public String convertIntToString(int number) {
     return String.valueOf(number);
+  }
+
+  public int getPlayerAverage(Morra game){
+    playerAverage = Math.round((player.getSumTotal())/roundNumber);
+
+    return playerAverage;
   }
 
   public int[] convertStringtoIntArray(String string) {
@@ -84,7 +92,7 @@ public class Morra {
     int aiSum = aiMoves[1];
 
     int realSum = fingers + aiFingers;
-    
+
     if ((realSum == aiSum) && (realSum == sum)) {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage("DRAW");
       return 1;

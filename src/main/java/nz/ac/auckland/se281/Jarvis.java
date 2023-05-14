@@ -5,21 +5,20 @@ import nz.ac.auckland.se281.Main.Difficulty;
 public class Jarvis {
 
   private Strategy strategy;
+  GameMode mode;
 
   
 
-public Jarvis(Difficulty difficulty) {
-  GameMode mode = DifficultyFactory.setGameMode(difficulty);
+  public Jarvis(Difficulty difficulty) {
+    mode = DifficultyFactory.setGameMode(difficulty);
+  } 
 
-  setStrategy(mode);
-}
-
-  public int[] setDifficulty() {
-    return strategy.decideBehaviour();
+  public int[] playStrategy() {
+    return strategy.getAiInputs();
   }
 
-  public void setStrategy(GameMode mode) {
-    this.strategy = mode.getStrategy();
+  public void setStrategy(Strategy strategy) {
+    this.strategy = strategy;
   
   }
 

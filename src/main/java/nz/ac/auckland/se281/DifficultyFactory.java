@@ -8,6 +8,9 @@ public class DifficultyFactory {
       case EASY:
         return new EasyGame();
 
+      case MEDIUM:
+        return new MediumGame();
+
     }
     return null;
 

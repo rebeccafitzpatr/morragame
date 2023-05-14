@@ -5,6 +5,8 @@ public class Player {
   int fingers;
   int sum;
 
+  int sumTotal = 0;
+
   public Player(String playerName) {
     this.playerName = playerName;
   }
@@ -39,10 +41,16 @@ public class Player {
 
     }
 
+    this.sumTotal = sumTotal +sum;
+
     int[] playerInputs = {fingers,sum};
     
 
     return playerInputs;
+  }
+
+  public int getSumTotal() {
+    return sumTotal;
   }
 }
 
