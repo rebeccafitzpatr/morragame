@@ -9,4 +9,8 @@ public abstract class GameMode {
 
   public GameMode() {};
 
+  public int[] playStrategy() {
+    return strategy.getAiInputs();
+  }
+
 }

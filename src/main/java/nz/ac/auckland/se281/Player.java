@@ -41,7 +41,8 @@ public class Player {
 
     }
 
-    this.sumTotal = sumTotal +sum;
+    this.sumTotal = sumTotal +fingers;
+
 
     int[] playerInputs = {fingers,sum};
     

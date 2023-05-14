@@ -5,7 +5,7 @@ import nz.ac.auckland.se281.Main.Difficulty;
 public class Jarvis {
 
   private Strategy strategy;
-  GameMode mode;
+  private GameMode mode;
 
   
 
@@ -13,8 +13,14 @@ public class Jarvis {
     mode = DifficultyFactory.setGameMode(difficulty);
   } 
 
-  public int[] playStrategy() {
-    return strategy.getAiInputs();
+  public int[] playGame(Morra game) {
+    if (mode instanceof EasyGame) {
+      return mode.playStrategy();
+    } else if (mode instanceof MediumGame) {
+      return mode.playStrategy();
+    } 
+
+    return null;
   }
 
   public void setStrategy(Strategy strategy) {

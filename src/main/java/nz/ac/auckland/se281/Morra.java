@@ -37,7 +37,7 @@ public class Morra {
     int [] playerInputs = player.takePlayerInputs(this);    
 
     //computer moves
-    int[] aiMoves = jarvis.playStrategy();
+    int[] aiMoves = jarvis.playGame(this);
 
     //decide the result
 
@@ -52,7 +52,7 @@ public class Morra {
     return String.valueOf(number);
   }
 
-  public int getPlayerAverage(Morra game){
+  public int getPlayerAverage(){
     playerAverage = Math.round((player.getSumTotal())/roundNumber);
 
     return playerAverage;

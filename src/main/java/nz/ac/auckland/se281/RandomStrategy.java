@@ -11,7 +11,6 @@ public class RandomStrategy implements Strategy {
     
     aiFingers = Utils.getRandomNumber(1, 5);
     
-    System.out.println(aiFingers);
     aiSum = Utils.getRandomNumber((aiFingers +1), (aiFingers+5));
 
     int[] aiMoves = new int[] {aiFingers,aiSum};
@@ -19,6 +18,12 @@ public class RandomStrategy implements Strategy {
     MessageCli.PRINT_INFO_HAND.printMessage("Jarvis", String.valueOf(aiFingers), String.valueOf(aiSum));
 
     return aiMoves;
+  }
+
+  @Override
+  public int[] getAiInputs(Morra game) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'getAiInputs'");
   }
   
 }
