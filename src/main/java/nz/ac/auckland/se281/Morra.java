@@ -8,10 +8,14 @@ public class Morra {
   private int roundNumber = 0;
   private Player player;
 
+  private Difficulty difficulty;
+
   public Morra() {}
 
   public void newGame(Difficulty difficulty, int pointsToWin, String[] options) {
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
+
+    this.difficulty = difficulty;
 
     player = new Player(options[0]);
     
@@ -30,7 +34,7 @@ public class Morra {
     int [] playerInputs = player.takePlayerInputs(this);    
 
     //computer moves
-    Jarvis jarvis = new Jarvis(new RandomStrategy());
+    Jarvis jarvis = new Jarvis(difficulty);
     int[] aiMoves = jarvis.setDifficulty();
 
     //decide the result
@@ -80,8 +84,7 @@ public class Morra {
     int aiSum = aiMoves[1];
 
     int realSum = fingers + aiFingers;
-    System.out.println(realSum);
-
+    
     if ((realSum == aiSum) && (realSum == sum)) {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage("DRAW");
       return 1;

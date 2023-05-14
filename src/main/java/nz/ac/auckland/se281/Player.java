@@ -24,9 +24,7 @@ public class Player {
     int[] processedInt = round.convertStringtoIntArray(input);
     
     this.fingers = processedInt[0];
-    System.out.println(fingers);
     this.sum = processedInt[1];
-    System.out.println(sum);
 
     if ((fingers >= 1) && (fingers <= 5)) { 
       if ((sum >= 1) && (sum <= 10)) {
