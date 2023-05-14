@@ -6,13 +6,15 @@ import nz.ac.auckland.se281.Main.Difficulty;
 
 public class Morra {
   private int roundNumber = 0;
-  private String playerName;
+  private Player player;
 
   public Morra() {}
 
   public void newGame(Difficulty difficulty, int pointsToWin, String[] options) {
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
-    this.playerName = options[0];
+
+    player = new Player(options[0]);
+    
   }
 
   public void play() {
@@ -22,46 +24,21 @@ public class Morra {
     
     MessageCli.START_ROUND.printMessage(roundNumberString);
     MessageCli.ASK_INPUT.printMessage();
-    
-    boolean play = true;
-    while (play) {
-    String input = Utils.scanner.nextLine();
 
-    int[] processedInt = convertStringtoIntArray(input);
-    
-    int fingers = processedInt[0];
-    System.out.println(fingers);
-    int sum = processedInt[1];
-    System.out.println(sum);
+    //players moves
 
-    if ((fingers >= 1) && (fingers <= 5)) { 
-      if ((sum >= 1) && (sum <= 10)) {
-      MessageCli.PRINT_INFO_HAND.printMessage(playerName, String.valueOf(fingers), String.valueOf(sum));
-      play = false;
-      }
-    } else {
-      MessageCli.INVALID_INPUT.printMessage();
-    }
+    int [] playerInputs = player.takePlayerInputs(this);    
 
+    //computer moves
     Jarvis jarvis = new Jarvis(new RandomStrategy());
-
-
     int[] aiMoves = jarvis.setDifficulty();
 
-    int aiFingers = aiMoves[0];
+    //decide the result
 
-    System.out.println(aiFingers);
-    int aiSum = aiMoves[1];
-
-    MessageCli.PRINT_INFO_HAND.printMessage("Jarvis", String.valueOf(aiFingers), String.valueOf(aiSum));
-
-    int result = decideResult(fingers, sum, aiFingers, aiSum);
-
-
+    int result = decideResult(playerInputs, aiMoves);
       
   }
 
-  }
 
   public void showStats() {}
 
@@ -80,6 +57,7 @@ public class Morra {
     while (splitString.length != 2) {
         MessageCli.INVALID_INPUT.printMessage();
         String input = Utils.scanner.nextLine();
+        splitString = input.split("");
     } 
 
     //the first element of the split array should suit the restrictions for fingers sum
@@ -95,8 +73,14 @@ public class Morra {
 
   }
 
-  public int decideResult(int fingers, int sum, int aiFingers, int aiSum) {
+  public int decideResult(int[] humanInput, int[] aiMoves) {
+    int fingers = humanInput[0];
+    int aiFingers = aiMoves[0];
+    int sum = humanInput[1];
+    int aiSum = aiMoves[1];
+
     int realSum = fingers + aiFingers;
+    System.out.println(realSum);
 
     if ((realSum == aiSum) && (realSum == sum)) {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage("DRAW");
@@ -117,3 +101,4 @@ public class Morra {
     }
   }
 }
+

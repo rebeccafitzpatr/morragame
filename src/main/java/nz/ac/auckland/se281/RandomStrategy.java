@@ -1,7 +1,5 @@
 package nz.ac.auckland.se281;
 
-import java.util.Random;
-
 public class RandomStrategy implements Strategy {
 
 
@@ -17,6 +15,8 @@ public class RandomStrategy implements Strategy {
     aiSum = Utils.getRandomNumber((aiFingers +1), (aiFingers+5));
 
     int[] aiMoves = new int[] {aiFingers,aiSum};
+
+    MessageCli.PRINT_INFO_HAND.printMessage("Jarvis", String.valueOf(aiFingers), String.valueOf(aiSum));
 
     return aiMoves;
   }
