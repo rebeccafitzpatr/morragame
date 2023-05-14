@@ -1,8 +1,6 @@
 package nz.ac.auckland.se281;
 
-import java.util.ArrayList;
 
-import org.apache.http.impl.client.AIMDBackoffManager;
 
 import nz.ac.auckland.se281.Main.Difficulty;
 
@@ -25,7 +23,8 @@ public class Morra {
     MessageCli.START_ROUND.printMessage(roundNumberString);
     MessageCli.ASK_INPUT.printMessage();
     
-    while (true) {
+    boolean play = true;
+    while (play) {
     String input = Utils.scanner.nextLine();
 
     int[] processedInt = convertStringtoIntArray(input);
@@ -38,19 +37,23 @@ public class Morra {
     if ((fingers >= 1) && (fingers <= 5)) { 
       if ((sum >= 1) && (sum <= 10)) {
       MessageCli.PRINT_INFO_HAND.printMessage(playerName, String.valueOf(fingers), String.valueOf(sum));
-      break;
+      play = false;
       }
     } else {
       MessageCli.INVALID_INPUT.printMessage();
     }
 
+    Jarvis jarvis = new Jarvis(new RandomStrategy());
 
-    int[] aiMoves = new EasyGame().setDifficulty();
+
+    int[] aiMoves = jarvis.setDifficulty();
 
     int aiFingers = aiMoves[0];
 
     System.out.println(aiFingers);
     int aiSum = aiMoves[1];
+
+    MessageCli.PRINT_INFO_HAND.printMessage("Jarvis", String.valueOf(aiFingers), String.valueOf(aiSum));
 
     int result = decideResult(fingers, sum, aiFingers, aiSum);
 
