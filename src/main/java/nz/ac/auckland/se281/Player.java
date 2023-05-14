@@ -1,9 +1,13 @@
 package nz.ac.auckland.se281;
 
+import java.util.ArrayList;
+
 public class Player {
   String playerName;
   int fingers;
   int sum;
+
+  ArrayList<Integer> fingersRecord = new ArrayList<Integer>();
 
   int sumTotal = 0;
 
@@ -43,11 +47,24 @@ public class Player {
 
     sumTotal = sumTotal + fingers;
 
+    //record the players fingers
+    fingersRecord.add(fingers);
+
 
     int[] playerInputs = {fingers,sum};
     
 
     return playerInputs;
+  }
+
+  public void findMostCommonFingers() {
+    int i;
+    int mostCommon;
+
+    for (i = 0; i < fingersRecord.size(); i++) {
+
+    }
+    
   }
 
   public int getSumTotal() {
