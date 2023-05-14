@@ -16,32 +16,29 @@ public class Morra {
 
   public void newGame(Difficulty difficulty, int pointsToWin, String[] options) {
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
-    roundNumber = 0;
-
+    roundNumber = 1;
     player = new Player(options[0]);
     jarvis = new Jarvis(difficulty);
     
   }
 
   public void play() {
-    // increment the round number for each time the user starts a new round.
-    roundNumber++;
-    
     String roundNumberString = convertIntToString(roundNumber);
     
     MessageCli.START_ROUND.printMessage(roundNumberString);
     MessageCli.ASK_INPUT.printMessage();
 
-    //players moves
-
-    int [] playerInputs = player.takePlayerInputs(this);    
-
     //computer moves
     int[] aiMoves = jarvis.playGame(this);
-
+    
+    //players moves
+    int [] playerInputs = player.takePlayerInputs(this);
     //decide the result
 
     int result = decideResult(playerInputs, aiMoves);
+
+    // increment the round number for each time the user starts a new round.
+    roundNumber++;
       
   }
 
@@ -53,9 +50,13 @@ public class Morra {
   }
 
   public int getPlayerAverage(){
-    playerAverage = Math.round((player.getSumTotal())/roundNumber);
-
+    this.playerAverage = Math.round(player.getSumTotal()/ (roundNumber-1));
+    System.out.println(playerAverage);
     return playerAverage;
+  }
+
+  public int getRoundNumber() {
+    return roundNumber;
   }
 
   public int[] convertStringtoIntArray(String string) {

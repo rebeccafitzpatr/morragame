@@ -15,9 +15,9 @@ public class Jarvis {
 
   public int[] playGame(Morra game) {
     if (mode instanceof EasyGame) {
-      return mode.playStrategy();
+      return mode.playStrategy(game);
     } else if (mode instanceof MediumGame) {
-      return mode.playStrategy();
+      return mode.playStrategy(game);
     } 
 
     return null;

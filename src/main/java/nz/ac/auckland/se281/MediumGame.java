@@ -4,8 +4,10 @@ public class MediumGame extends GameMode {
 
   int counter;
 
-  public int[] playStrategy() {
-    if (counter < 3) {
+  public int[] playStrategy(Morra game) {
+
+    counter = game.getRoundNumber();
+    if (counter < 4) {
       this.strategy = new RandomStrategy();
       return strategy.getAiInputs();
     }else {

@@ -9,7 +9,7 @@ public abstract class GameMode {
 
   public GameMode() {};
 
-  public int[] playStrategy() {
+  public int[] playStrategy(Morra game) {
     return strategy.getAiInputs();
   }
 

@@ -16,9 +16,10 @@ public class AverageStrategy implements Strategy {
   public int[] getAiInputs(Morra game) {
     aiFingers = Utils.getRandomNumber(1, 5);
     
-    aiSum = game.getPlayerAverage();
+    aiSum = aiFingers + game.getPlayerAverage();
     int[] aiInputs = {aiFingers, aiSum};
-  
+
+    MessageCli.PRINT_INFO_HAND.printMessage("Jarvis", String.valueOf(aiFingers), String.valueOf(aiSum));
     return aiInputs;
     
   }
