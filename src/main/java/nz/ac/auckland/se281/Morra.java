@@ -2,6 +2,8 @@ package nz.ac.auckland.se281;
 
 import java.util.ArrayList;
 
+import org.apache.http.impl.client.AIMDBackoffManager;
+
 import nz.ac.auckland.se281.Main.Difficulty;
 
 public class Morra {
@@ -43,6 +45,15 @@ public class Morra {
     }
 
 
+    int[] aiMoves = new EasyGame().setDifficulty();
+
+    int aiFingers = aiMoves[0];
+
+    System.out.println(aiFingers);
+    int aiSum = aiMoves[1];
+
+    int result = decideResult(fingers, sum, aiFingers, aiSum);
+
 
       
   }
@@ -79,5 +90,27 @@ public class Morra {
     return output;
 
 
+  }
+
+  public int decideResult(int fingers, int sum, int aiFingers, int aiSum) {
+    int realSum = fingers + aiFingers;
+
+    if ((realSum == aiSum) && (realSum == sum)) {
+      MessageCli.PRINT_OUTCOME_ROUND.printMessage("DRAW");
+      return 1;
+
+    } else if (realSum == sum) {
+      MessageCli.PRINT_OUTCOME_ROUND.printMessage("HUMAN_WINS");
+
+      return 2;
+    } else if (realSum == aiSum) {
+      MessageCli.PRINT_OUTCOME_ROUND.printMessage("AI_WINS");
+
+      return 0;
+    }else {
+      MessageCli.PRINT_OUTCOME_ROUND.printMessage("DRAW");
+
+      return 1;
+    }
   }
 }
