@@ -50,40 +50,17 @@ public class Morra {
   }
 
   public int getPlayerAverage(){
-    this.playerAverage = Math.round(player.getSumTotal()/ (roundNumber-1));
+    int sumTotal = player.getSumTotal();
+    double divisor = roundNumber-1;
+
+    double average = (sumTotal/divisor);
+    playerAverage = (int) Math.round(average);
     System.out.println(playerAverage);
     return playerAverage;
   }
 
   public int getRoundNumber() {
     return roundNumber;
-  }
-
-  public int[] convertStringtoIntArray(String string) {
-    //first split the string by spaces
-
-    String[] splitString = string.split(" ");
-    
-    //check that it has exactly two elements in it only
-    //otherwise ask the user to try again
-
-    while (splitString.length != 2) {
-        MessageCli.INVALID_INPUT.printMessage();
-        String input = Utils.scanner.nextLine();
-        splitString = input.split("");
-    } 
-
-    //the first element of the split array should suit the restrictions for fingers sum
-    int fingers = Integer.valueOf(splitString[0]);
-    int sum = Integer.valueOf(splitString[1]);
-    
-    int[] output = new int[2];
-    output[0] = fingers;
-    output[1] = sum;
-
-    return output;
-
-
   }
 
   public int decideResult(int[] humanInput, int[] aiMoves) {
