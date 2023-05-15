@@ -65,30 +65,30 @@ public class Player {
     int threeFingers = 0;
     int fourFingers = 0;
     int fiveFingers = 0;
-    int[] fingersTally = {oneFinger, twoFingers, threeFingers, fourFingers, fiveFingers};
+    
 
 
 
     for (i = 0; i < fingersRecord.size(); i++) {
 
-      switch(fingersRecord.get(i)){
-        case 1:
+      int value = fingersRecord.get(i);
+      if (value == 1){
           oneFinger++;
-
-        case 2:
+          
+      } else if (value == 2) {
+      
           twoFingers++;
-        
-        case 3:
+      } else if (value == 3) { 
           threeFingers++;
-
-        case 4:
+      } else if (value == 4) {
           fourFingers++;
-
-        case 5:
+      } else if (value == 5) {
           fiveFingers++;
 
       }
     }
+
+    int[] fingersTally = {oneFinger, twoFingers, threeFingers, fourFingers, fiveFingers};
 
     return fingersTally;
     
