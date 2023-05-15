@@ -14,6 +14,9 @@ public class DifficultyFactory {
       case HARD:
         return new HardGame();
 
+      case MASTER:
+        return new MasterGame();
+
     }
     return null;
 

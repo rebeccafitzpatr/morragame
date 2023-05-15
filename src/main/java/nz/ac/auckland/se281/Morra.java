@@ -55,6 +55,7 @@ public class Morra {
 
     for (i = 0; i < fingersTally.length; i++) {
       if (fingersTally[i] > most) {
+        most = fingersTally[i];
         index = i+1;
       }
     }
