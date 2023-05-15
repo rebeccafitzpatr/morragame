@@ -45,6 +45,23 @@ public class Morra {
 
   public void showStats() {}
 
+
+  public int findMostCommonFingers() {
+    int[] fingersTally = player.fingersTally();
+
+    int most = fingersTally[0];
+    int i;
+
+    for (i = 0; i < fingersTally.length; i++) {
+      if (fingersTally[i] > most) {
+        most = fingersTally[i];
+      }
+    }
+
+    return most;
+
+  }
+
   public String convertIntToString(int number) {
     return String.valueOf(number);
   }

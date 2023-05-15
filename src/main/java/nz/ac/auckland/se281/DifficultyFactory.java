@@ -11,6 +11,9 @@ public class DifficultyFactory {
       case MEDIUM:
         return new MediumGame();
 
+      case HARD:
+        return new HardGame();
+
     }
     return null;
 

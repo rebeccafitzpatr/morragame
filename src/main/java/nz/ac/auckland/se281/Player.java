@@ -57,15 +57,44 @@ public class Player {
     return playerInputs;
   }
 
-  public void findMostCommonFingers() {
+  public int[] fingersTally() {
     int i;
-    int mostCommon;
+    int top;
+    int oneFinger = 0;
+    int twoFingers = 0;
+    int threeFingers = 0;
+    int fourFingers = 0;
+    int fiveFingers = 0;
+    int[] fingersTally = {oneFinger, twoFingers, threeFingers, fourFingers, fiveFingers};
+
+
 
     for (i = 0; i < fingersRecord.size(); i++) {
 
+      switch(fingersRecord.get(i)){
+        case 1:
+          oneFinger++;
+
+        case 2:
+          twoFingers++;
+        
+        case 3:
+          threeFingers++;
+
+        case 4:
+          fourFingers++;
+
+        case 5:
+          fiveFingers++;
+
+      }
     }
+
+    return fingersTally;
     
   }
+
+  
 
   public int getSumTotal() {
     return sumTotal;
