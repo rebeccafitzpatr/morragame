@@ -18,7 +18,7 @@ public class Morra {
 
   public void newGame(Difficulty difficulty, int pointsToWin, String[] options) {
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
-    this.roundNumber = 1;
+    this.roundNumber = 0;
     this.pointsToWin = pointsToWin;
     player = new Player(options[0]);
     jarvis = new Jarvis(difficulty);
@@ -28,7 +28,9 @@ public class Morra {
   public void play() {
 
     //first check that a new game has been started
-    if (getRoundNumber() > 0) {
+    if (getRoundNumber() >= 0) {
+       // increment the round number for each time the user starts a new round.
+    incrementRoundNumber();
     String roundNumberString = convertIntToString(getRoundNumber());
     
     MessageCli.START_ROUND.printMessage(roundNumberString);
@@ -49,10 +51,9 @@ public class Morra {
 
     this.result = decideResult(playerInputs, aiMoves);
 
+    
     checkWinner();
-
-    // increment the round number for each time the user starts a new round.
-    incrementRoundNumber();
+   
 
     } else {
       // if the round number is 0, then a new game has not started and the play command cannot be used
@@ -64,6 +65,22 @@ public class Morra {
 
   public void showStats() {
 
+    //first check that a game is in play
+
+    if (roundNumber > 0) {
+      //calculate the required extra wins to finish the game
+      String playerWinsNeeded = String.valueOf(pointsToWin - player.getNumOfWins());
+      String jarvisWinsNeeded = String.valueOf(pointsToWin - jarvis.getNumOfWins());
+      String playerName = player.getPlayerName();
+      String playerNumOfWins = String.valueOf(player.getNumOfWins());
+      String jarvisNumOfWins = String.valueOf(jarvis.getNumOfWins());
+
+      MessageCli.PRINT_PLAYER_WINS.printMessage(playerName, playerNumOfWins, playerWinsNeeded);
+      MessageCli.PRINT_PLAYER_WINS.printMessage("Jarvis",jarvisNumOfWins, jarvisWinsNeeded);
+
+    } else {
+      MessageCli.GAME_NOT_STARTED.printMessage();
+    }
   }
 
   public void checkWinner() {
