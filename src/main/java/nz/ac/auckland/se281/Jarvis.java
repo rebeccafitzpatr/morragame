@@ -6,6 +6,7 @@ public class Jarvis {
 
   private Strategy strategy;
   private GameMode mode;
+  private int numOfWins = 0;
 
   
 
@@ -21,6 +22,14 @@ public class Jarvis {
   public void setStrategy(Strategy strategy) {
     this.strategy = strategy;
   
+  }
+
+  public void incrementNumOfWins() {
+    this.numOfWins++;
+  }
+
+  public int getNumOfWins() {
+    return numOfWins;
   }
 
   

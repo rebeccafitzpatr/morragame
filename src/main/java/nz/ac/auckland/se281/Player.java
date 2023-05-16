@@ -3,9 +3,11 @@ package nz.ac.auckland.se281;
 import java.util.ArrayList;
 
 public class Player {
-  String playerName;
-  int fingers;
-  int sum;
+  private String playerName;
+  private int fingers;
+  private int sum;
+  private int numOfWins;
+
 
   ArrayList<Integer> fingersRecord = new ArrayList<Integer>();
 
@@ -44,9 +46,6 @@ public class Player {
     }
 
     }
-
-    sumTotal = sumTotal + fingers;
-
     //record the players fingers
     fingersRecord.add(fingers);
 
@@ -55,6 +54,10 @@ public class Player {
     
 
     return playerInputs;
+  }
+
+  public void incrementTotalFingers() {
+    sumTotal = sumTotal + fingers;
   }
 
   public int[] fingersTally() {
@@ -94,6 +97,10 @@ public class Player {
     
   }
 
+
+  public String getPlayerName() {
+    return playerName;
+  }
   
 
   public int getSumTotal() {
@@ -125,6 +132,14 @@ public class Player {
     return output;
 
 
+  }
+
+  public void incrementNumOfWins() {
+    this.numOfWins++;
+  }
+
+  public int getNumOfWins() {
+    return numOfWins;
   }
 }
 

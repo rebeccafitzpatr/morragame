@@ -8,6 +8,8 @@ public class Morra {
   private int roundNumber = 0;
   private Player player;
   private Jarvis jarvis;
+  private int result;
+  private int pointsToWin;
 
   private int playerAverage;
 
@@ -17,6 +19,7 @@ public class Morra {
   public void newGame(Difficulty difficulty, int pointsToWin, String[] options) {
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
     this.roundNumber = 1;
+    this.pointsToWin = pointsToWin;
     player = new Player(options[0]);
     jarvis = new Jarvis(difficulty);
     
@@ -30,15 +33,23 @@ public class Morra {
     
     MessageCli.START_ROUND.printMessage(roundNumberString);
     MessageCli.ASK_INPUT.printMessage();
-
-    //computer moves
-    int[] aiMoves = jarvis.playGame(this);
     
     //players moves
     int [] playerInputs = player.takePlayerInputs(this);
+
+    //computer moves
+    int[] aiMoves = jarvis.playGame(this);
+  
+      
+    //update the total fingers played by user
+
+    player.incrementTotalFingers();
+
     //decide the result
 
-    int result = decideResult(playerInputs, aiMoves);
+    this.result = decideResult(playerInputs, aiMoves);
+
+    checkWinner();
 
     // increment the round number for each time the user starts a new round.
     incrementRoundNumber();
@@ -53,6 +64,23 @@ public class Morra {
 
   public void showStats() {
 
+  }
+
+  public void checkWinner() {
+    if (jarvis.getNumOfWins() == pointsToWin) {
+      
+
+      MessageCli.END_GAME.printMessage("Jarvis", String.valueOf(roundNumber));
+      this.roundNumber = 0;
+      return;
+
+    } else if (player.getNumOfWins() == pointsToWin) {
+
+      MessageCli.END_GAME.printMessage(player.getPlayerName(), String.valueOf(roundNumber));
+      this.roundNumber = 0;
+
+      return;
+    }
   }
 
 
@@ -110,10 +138,12 @@ public class Morra {
 
     } else if (realSum == sum) {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage("HUMAN_WINS");
+      player.incrementNumOfWins();
 
       return 2;
     } else if (realSum == aiSum) {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage("AI_WINS");
+      jarvis.incrementNumOfWins();
 
       return 0;
     }else {
