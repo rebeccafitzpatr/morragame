@@ -5,7 +5,7 @@ package nz.ac.auckland.se281;
 import nz.ac.auckland.se281.Main.Difficulty;
 
 public class Morra {
-  private int roundNumber;
+  private int roundNumber = 0;
   private Player player;
   private Jarvis jarvis;
 
@@ -16,14 +16,17 @@ public class Morra {
 
   public void newGame(Difficulty difficulty, int pointsToWin, String[] options) {
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
-    roundNumber = 1;
+    this.roundNumber = 1;
     player = new Player(options[0]);
     jarvis = new Jarvis(difficulty);
     
   }
 
   public void play() {
-    String roundNumberString = convertIntToString(roundNumber);
+
+    //first check that a new game has been started
+    if (getRoundNumber() > 0) {
+    String roundNumberString = convertIntToString(getRoundNumber());
     
     MessageCli.START_ROUND.printMessage(roundNumberString);
     MessageCli.ASK_INPUT.printMessage();
@@ -38,12 +41,19 @@ public class Morra {
     int result = decideResult(playerInputs, aiMoves);
 
     // increment the round number for each time the user starts a new round.
-    roundNumber++;
+    incrementRoundNumber();
+
+    } else {
+      // if the round number is 0, then a new game has not started and the play command cannot be used
+      MessageCli.GAME_NOT_STARTED.printMessage();
+    }
       
   }
 
 
-  public void showStats() {}
+  public void showStats() {
+
+  }
 
 
   public int findMostCommonFingers() {
@@ -78,6 +88,10 @@ public class Morra {
     return playerAverage;
   }
 
+  
+  public void incrementRoundNumber() {
+    this.roundNumber++;
+  }
   public int getRoundNumber() {
     return roundNumber;
   }
