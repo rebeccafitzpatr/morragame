@@ -5,7 +5,7 @@ package nz.ac.auckland.se281;
 import nz.ac.auckland.se281.Main.Difficulty;
 
 public class Morra {
-  private int roundNumber = 0;
+  private int roundNumber = -1;
   private Player player;
   private Jarvis jarvis;
   private int result;
@@ -49,7 +49,7 @@ public class Morra {
 
     //decide the result
 
-    this.result = decideResult(playerInputs, aiMoves);
+    result = decideResult(playerInputs, aiMoves);
 
     
     checkWinner();
@@ -88,13 +88,13 @@ public class Morra {
       
 
       MessageCli.END_GAME.printMessage("Jarvis", String.valueOf(roundNumber));
-      this.roundNumber = 0;
+      this.roundNumber = -1;
       return;
 
     } else if (player.getNumOfWins() == pointsToWin) {
 
       MessageCli.END_GAME.printMessage(player.getPlayerName(), String.valueOf(roundNumber));
-      this.roundNumber = 0;
+      this.roundNumber = -1;
 
       return;
     }

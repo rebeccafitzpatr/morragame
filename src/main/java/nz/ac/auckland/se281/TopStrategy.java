@@ -2,8 +2,8 @@ package nz.ac.auckland.se281;
 
 public class TopStrategy implements Strategy{
 
-  int aiFingers;
-  int aiSum;
+  private int aiFingers;
+  private int aiSum;
 
   @Override
   public int[] getAiInputs() {

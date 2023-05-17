@@ -3,7 +3,7 @@ package nz.ac.auckland.se281;
 public class HardGame extends GameMode {
   
 
-  int counter;
+  private int counter;
 
   public int[] playStrategy(Morra game) {
 

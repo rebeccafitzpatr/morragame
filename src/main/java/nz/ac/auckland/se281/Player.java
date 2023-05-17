@@ -62,7 +62,6 @@ public class Player {
 
   public int[] fingersTally() {
     int i;
-    int top;
     int oneFinger = 0;
     int twoFingers = 0;
     int threeFingers = 0;
