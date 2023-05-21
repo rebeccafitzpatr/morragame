@@ -1,9 +1,9 @@
 package nz.ac.auckland.se281;
 
-public class MasterGame extends GameMode{
+public class MasterGame extends GameMode {
   
 
-  int counter;
+  private int counter;
 
   public int[] playStrategy(Morra game) {
 

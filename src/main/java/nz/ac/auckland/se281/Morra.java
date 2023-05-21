@@ -27,13 +27,12 @@ public class Morra {
   public void play() {
 
     //first check that a new game has been started
-    if (getRoundNumber() >= 0 ) {
-       // increment the round number for each time the user starts a new round.
+    if (getRoundNumber() >= 0) {
+      // increment the round number for each time the user starts a new round.
       incrementRoundNumber();
       String roundNumberString = convertIntToString(getRoundNumber());
       
       MessageCli.START_ROUND.printMessage(roundNumberString);
-      MessageCli.ASK_INPUT.printMessage();
       
       //players moves
       int [] playerInputs = player.takePlayerInputs(this);
@@ -75,7 +74,7 @@ public class Morra {
       String jarvisNumOfWins = String.valueOf(jarvis.getNumOfWins());
 
       MessageCli.PRINT_PLAYER_WINS.printMessage(playerName, playerNumOfWins, playerWinsNeeded);
-      MessageCli.PRINT_PLAYER_WINS.printMessage("Jarvis",jarvisNumOfWins, jarvisWinsNeeded);
+      MessageCli.PRINT_PLAYER_WINS.printMessage("Jarvis", jarvisNumOfWins, jarvisWinsNeeded);
 
     } else {
       MessageCli.GAME_NOT_STARTED.printMessage();
@@ -117,7 +116,7 @@ public class Morra {
     for (i = 0; i < fingersTally.length; i++) {
       if (fingersTally[i] > most) {
         most = fingersTally[i];
-        index = i+1;
+        index = i + 1;
       }
     }
 
@@ -131,11 +130,11 @@ public class Morra {
 
   public int getPlayerAverage() {
     int sumTotal = player.getSumTotal();
-    double divisor = roundNumber-1;
+    double divisor = roundNumber - 1;
 
     //use double type, in order to calculate correct decimal
 
-    double average = (sumTotal/divisor);
+    double average = (sumTotal / divisor);
     playerAverage = (int) Math.round(average);
     System.out.println(playerAverage);
     return playerAverage;
@@ -145,6 +144,7 @@ public class Morra {
   public void incrementRoundNumber() {
     this.roundNumber++;
   }
+
   public int getRoundNumber() {
     return roundNumber;
   }

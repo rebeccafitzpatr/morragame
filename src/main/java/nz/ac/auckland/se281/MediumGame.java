@@ -2,7 +2,7 @@ package nz.ac.auckland.se281;
 
 public class MediumGame extends GameMode {
 
-  int counter;
+  private int counter;
 
   public int[] playStrategy(Morra game) {
 

@@ -13,9 +13,9 @@ public class RandomStrategy implements Strategy {
     
     aiFingers = Utils.getRandomNumber(1, 5);
     
-    aiSum = Utils.getRandomNumber((aiFingers +1), (aiFingers+5));
+    aiSum = Utils.getRandomNumber((aiFingers + 1), (aiFingers + 5));
 
-    int[] aiMoves = new int[] {aiFingers,aiSum};
+    int[] aiMoves = new int[] {aiFingers, aiSum};
 
     MessageCli.PRINT_INFO_HAND.printMessage("Jarvis", String.valueOf(aiFingers), String.valueOf(aiSum));
 
