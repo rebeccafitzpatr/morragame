@@ -8,6 +8,9 @@ public class HardGame extends GameMode {
   public int[] playStrategy(Morra game) {
 
     counter = game.getRoundNumber();
+
+    //use the random strategy up to round 3
+    //from round 4 onwards use top strategy
     if (counter < 4) {
       this.strategy = new RandomStrategy();
       return strategy.getAiInputs();

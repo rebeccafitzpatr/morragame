@@ -15,14 +15,9 @@ public class Jarvis {
   } 
 
   public int[] playGame(Morra game) {
-      return mode.playStrategy(game);
+    return mode.playStrategy(game);
 
   }
-
-  //public void setStrategy(Strategy strategy) {
-    //this.strategy = strategy;
-  
-  //}
 
   public void incrementNumOfWins() {
     this.numOfWins++;

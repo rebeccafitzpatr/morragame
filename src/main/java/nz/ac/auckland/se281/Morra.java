@@ -8,7 +8,6 @@ public class Morra {
   private int roundNumber = -1;
   private Player player;
   private Jarvis jarvis;
-  private int result;
   private int pointsToWin;
 
   private int playerAverage;
@@ -30,30 +29,30 @@ public class Morra {
     //first check that a new game has been started
     if (getRoundNumber() >= 0 ) {
        // increment the round number for each time the user starts a new round.
-    incrementRoundNumber();
-    String roundNumberString = convertIntToString(getRoundNumber());
-    
-    MessageCli.START_ROUND.printMessage(roundNumberString);
-    MessageCli.ASK_INPUT.printMessage();
-    
-    //players moves
-    int [] playerInputs = player.takePlayerInputs(this);
-
-    //computer moves
-    int[] aiMoves = jarvis.playGame(this);
-  
+      incrementRoundNumber();
+      String roundNumberString = convertIntToString(getRoundNumber());
       
-    //update the total fingers played by user
+      MessageCli.START_ROUND.printMessage(roundNumberString);
+      MessageCli.ASK_INPUT.printMessage();
+      
+      //players moves
+      int [] playerInputs = player.takePlayerInputs(this);
 
-    player.incrementTotalFingers();
-
-    //decide the result
-
-    result = decideResult(playerInputs, aiMoves);
-
+      //computer moves
+      int[] aiMoves = jarvis.playGame(this);
     
-    checkWinner();
-   
+        
+      //update the total fingers played by user
+
+      player.incrementTotalFingers();
+
+      //decide the result
+
+      decideResult(playerInputs, aiMoves);
+
+      
+      checkWinner();
+    
 
     } else {
       // if the round number is 0, then a new game has not started and the play command cannot be used
@@ -84,9 +83,13 @@ public class Morra {
   }
 
   public void checkWinner() {
+    //check if either jarvis or player have reached the required number of wins
+
+    //if so end the game
+
     if (jarvis.getNumOfWins() == pointsToWin) {
       
-
+      
       MessageCli.END_GAME.printMessage("Jarvis", String.valueOf(roundNumber));
       this.roundNumber = -1;
       return;
@@ -108,6 +111,9 @@ public class Morra {
     int i;
     int index = 1;
 
+    //find the number of fingers that has had the most inputs
+    //start with the first number being the most, then record any next number that is larger
+
     for (i = 0; i < fingersTally.length; i++) {
       if (fingersTally[i] > most) {
         most = fingersTally[i];
@@ -123,9 +129,11 @@ public class Morra {
     return String.valueOf(number);
   }
 
-  public int getPlayerAverage(){
+  public int getPlayerAverage() {
     int sumTotal = player.getSumTotal();
     double divisor = roundNumber-1;
+
+    //use double type, in order to calculate correct decimal
 
     double average = (sumTotal/divisor);
     playerAverage = (int) Math.round(average);
@@ -141,7 +149,7 @@ public class Morra {
     return roundNumber;
   }
 
-  public int decideResult(int[] humanInput, int[] aiMoves) {
+  public void decideResult(int[] humanInput, int[] aiMoves) {
     int fingers = humanInput[0];
     int aiFingers = aiMoves[0];
     int sum = humanInput[1];
@@ -149,24 +157,29 @@ public class Morra {
 
     int realSum = fingers + aiFingers;
 
+    //check whether the play or jarvis has guessed the correct number or not.
+
+    // if they have the same guess, then they draw
     if ((realSum == aiSum) && (realSum == sum)) {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage("DRAW");
-      return 1;
+      return;
 
+      //if either player or jarvis guess the the correct sum, then they win
     } else if (realSum == sum) {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage("HUMAN_WINS");
       player.incrementNumOfWins();
 
-      return 2;
+      return;
+
     } else if (realSum == aiSum) {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage("AI_WINS");
       jarvis.incrementNumOfWins();
 
-      return 0;
-    }else {
+      return;
+    } else {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage("DRAW");
 
-      return 1;
+      return;
     }
   }
 }

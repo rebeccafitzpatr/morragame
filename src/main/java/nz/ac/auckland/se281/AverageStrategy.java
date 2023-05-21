@@ -8,14 +8,15 @@ public class AverageStrategy implements Strategy {
 
   @Override
   public int[] getAiInputs() {
-      throw new UnsupportedOperationException("Unimplemented method 'getAiInputs'");
+    throw new UnsupportedOperationException("Unimplemented method 'getAiInputs'");
 
-} 
+  } 
 
   @Override
   public int[] getAiInputs(Morra game) {
     aiFingers = Utils.getRandomNumber(1, 5);
-    
+
+    //calculate the ai output for sum, for this average strategy sum = fingers + players average
     aiSum = aiFingers + game.getPlayerAverage();
     int[] aiInputs = {aiFingers, aiSum};
 

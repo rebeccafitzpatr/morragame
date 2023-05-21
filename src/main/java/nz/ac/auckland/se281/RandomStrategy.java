@@ -8,6 +8,8 @@ public class RandomStrategy implements Strategy {
 
   @Override
   public int[] getAiInputs() {
+
+    //in this strategy, the jarvis will play random numbers irrespective of what the human does
     
     aiFingers = Utils.getRandomNumber(1, 5);
     
@@ -22,7 +24,6 @@ public class RandomStrategy implements Strategy {
 
   @Override
   public int[] getAiInputs(Morra game) {
-    // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'getAiInputs'");
   }
   

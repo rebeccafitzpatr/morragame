@@ -7,7 +7,6 @@ public class TopStrategy implements Strategy{
 
   @Override
   public int[] getAiInputs() {
-    // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'getAiInputs'");
   }
 
@@ -16,6 +15,7 @@ public class TopStrategy implements Strategy{
     aiFingers = Utils.getRandomNumber(1, 5);
 
     int top = game.findMostCommonFingers();
+    // the jarvis will add the human players most common input, to calculate the ai sum
     
     aiSum = aiFingers + top;
     int[] aiInputs = {aiFingers, aiSum};

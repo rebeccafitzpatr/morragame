@@ -7,8 +7,6 @@ public abstract class GameMode {
   protected int aiSum;
   protected Morra game;
 
-  public GameMode() {};
-
   public int[] playStrategy(Morra game) {
     return strategy.getAiInputs();
   }
