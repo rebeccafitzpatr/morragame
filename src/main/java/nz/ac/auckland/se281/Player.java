@@ -24,16 +24,19 @@ public class Player {
   }
 
   public int[] takePlayerInputs(Morra round) {
+    int[] playerInputs = new int[2];
     
   boolean play = true;
     while (play) {
-    String input = Utils.scanner.nextLine();
+     String input = Utils.scanner.nextLine();
 
     int[] processedInt = convertStringtoIntArray(input);
+
+    if (processedInt != null) {
     
     this.fingers = processedInt[0];
     this.sum = processedInt[1];
-
+    
     if ((fingers >= 1) && (fingers <= 5)) { 
       if ((sum >= 1) && (sum <= 10)) {
       MessageCli.PRINT_INFO_HAND.printMessage(playerName, String.valueOf(fingers), String.valueOf(sum));
@@ -45,15 +48,22 @@ public class Player {
       MessageCli.INVALID_INPUT.printMessage();
     }
 
-    }
+
+    
     //record the players fingers
     fingersRecord.add(fingers);
 
 
-    int[] playerInputs = {fingers,sum};
+    playerInputs[0] = fingers;
+    playerInputs[1] = sum;
     
 
-    return playerInputs;
+    
+  } else {
+    play = true;
+  }
+}
+return playerInputs;
   }
 
   public void incrementTotalFingers() {
@@ -121,6 +131,7 @@ public class Player {
     } 
 
     //the first element of the split array should suit the restrictions for fingers sum
+    if (Utils.isInteger(String.valueOf(splitString[0])) && Utils.isInteger(String.valueOf(splitString[1]))) {
     int fingers = Integer.valueOf(splitString[0]);
     int sum = Integer.valueOf(splitString[1]);
     
@@ -129,6 +140,12 @@ public class Player {
     output[1] = sum;
 
     return output;
+
+    } else {
+      MessageCli.INVALID_INPUT.printMessage();
+      return null;
+      
+    }
 
 
   }

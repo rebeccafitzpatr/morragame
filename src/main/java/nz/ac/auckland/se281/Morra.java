@@ -28,7 +28,7 @@ public class Morra {
   public void play() {
 
     //first check that a new game has been started
-    if (getRoundNumber() >= 0) {
+    if (getRoundNumber() >= 0 ) {
        // increment the round number for each time the user starts a new round.
     incrementRoundNumber();
     String roundNumberString = convertIntToString(getRoundNumber());
