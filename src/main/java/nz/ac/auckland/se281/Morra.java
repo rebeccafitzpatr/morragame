@@ -65,7 +65,7 @@ public class Morra {
 
     //first check that a game is in play
 
-    if (roundNumber > 0) {
+    if (roundNumber >= 0) {
       //calculate the required extra wins to finish the game
       String playerWinsNeeded = String.valueOf(pointsToWin - player.getNumOfWins());
       String jarvisWinsNeeded = String.valueOf(pointsToWin - jarvis.getNumOfWins());
@@ -136,7 +136,6 @@ public class Morra {
 
     double average = (sumTotal / divisor);
     playerAverage = (int) Math.round(average);
-    System.out.println(playerAverage);
     return playerAverage;
   }
 

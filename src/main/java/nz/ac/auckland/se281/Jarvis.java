@@ -4,7 +4,6 @@ import nz.ac.auckland.se281.Main.Difficulty;
 
 public class Jarvis {
 
-  //private Strategy strategy;
   private GameMode mode;
   private int numOfWins = 0;
 

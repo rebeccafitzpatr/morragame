@@ -1,6 +1,6 @@
 package nz.ac.auckland.se281;
 
-  public class TopStrategy implements Strategy{
+public class TopStrategy implements Strategy {
 
   private int aiFingers;
   private int aiSum;
